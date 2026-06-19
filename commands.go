@@ -4,6 +4,11 @@ import (
 	"errors"
 )
 
+var handlers = map[string]func(*state, command) error{
+	"login":    handlerLogin,
+	"register": handleRegister,
+}
+
 type commands struct {
 	commands map[string]func(*state, command) error
 }

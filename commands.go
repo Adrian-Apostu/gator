@@ -6,7 +6,9 @@ import (
 
 var handlers = map[string]func(*state, command) error{
 	"login":    handlerLogin,
-	"register": handleRegister,
+	"register": handlerRegister,
+	"reset":    handlerReset,
+	"users":    handlerUsers,
 }
 
 type commands struct {

@@ -5,13 +5,15 @@ import (
 )
 
 var handlers = map[string]func(*state, command) error{
-	"login":    handlerLogin,
-	"register": handlerRegister,
-	"reset":    handlerReset,
-	"users":    handlerUsers,
-	"agg":      handlerAgg,
-	"addfeed":  handlerAddFeed,
-	"feeds":    handlerFeeds,
+	"login":     handlerLogin,
+	"register":  handlerRegister,
+	"reset":     handlerReset,
+	"users":     handlerUsers,
+	"agg":       handlerAgg,
+	"addfeed":   handlerAddFeed,
+	"feeds":     handlerFeeds,
+	"follow":    handlerFeedFollows,
+	"following": handlerFollowing,
 }
 
 type commands struct {

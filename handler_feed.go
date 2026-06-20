@@ -12,7 +12,7 @@ import (
 
 func handlerAddFeed(s *state, cmd command) error {
 	if len(cmd.args) < 2 {
-		return errors.New("Please provide a name and url.")
+		return errors.New("please provide a name and url")
 	}
 
 	user, err := s.db.GetUser(context.Background(), s.cfg.CurrentUserName)
@@ -49,6 +49,16 @@ func handlerAddFeed(s *state, cmd command) error {
 
 	fmt.Printf("%+v\n", feed)
 
+	return nil
+}
+
+func handlerAgg(s *state, cmd command) error {
+	feed, err := fetchFeed(context.Background(), "https://www.wagslane.dev/index.xml")
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("%+v\n", feed)
 	return nil
 }
 

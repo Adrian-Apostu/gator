@@ -17,7 +17,7 @@ func handlerLogin(s *state, cmd command) error {
 
 	user, err := s.db.GetUser(context.Background(), cmd.args[0])
 	if err != nil {
-		return errors.New("User not registered!")
+		return errors.New("user not registered")
 	}
 
 	err = s.cfg.SetUser(user.Name)
@@ -58,7 +58,7 @@ func handlerRegister(s *state, cmd command) error {
 func handlerUsers(s *state, cmd command) error {
 	users, err := s.db.GetUsers(context.Background())
 	if err != nil {
-		return errors.New("Failed to get users!")
+		return errors.New("failed to get users")
 	}
 
 	for _, user := range users {
@@ -68,5 +68,15 @@ func handlerUsers(s *state, cmd command) error {
 			fmt.Printf("* %s\n", user.Name)
 		}
 	}
+	return nil
+}
+
+func handlerReset(s *state, cmd command) error {
+	err := s.db.DeleteUsers(context.Background())
+
+	if err != nil {
+		return errors.New("failed to reset users")
+	}
+	fmt.Println("Users database reset successfully!")
 	return nil
 }

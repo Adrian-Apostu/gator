@@ -10,14 +10,9 @@ import (
 	"github.com/google/uuid"
 )
 
-func handlerFeedFollows(s *state, cmd command) error {
+func handlerFeedFollows(s *state, cmd command, user database.User) error {
 	if len(cmd.args) == 0 {
 		return errors.New("no feed specified")
-	}
-
-	user, err := s.db.GetUser(context.Background(), s.cfg.CurrentUserName)
-	if err != nil {
-		return err
 	}
 
 	feed, err := s.db.GetFeedByUrl(context.Background(), cmd.args[0])
@@ -43,11 +38,8 @@ func handlerFeedFollows(s *state, cmd command) error {
 	return nil
 }
 
-func handlerFollowing(s *state, cmd command) error {
-	user, err := s.db.GetUser(context.Background(), s.cfg.CurrentUserName)
-	if err != nil {
-		return err
-	}
+func handlerFollowing(s *state, cmd command, user database.User) error {
+
 	follows, err := s.db.GetFeedFollowsForUser(context.Background(), user.ID)
 	if err != nil {
 		return errors.New("could not fetch following")

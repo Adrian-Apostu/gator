@@ -10,10 +10,10 @@ var handlers = map[string]func(*state, command) error{
 	"reset":     handlerReset,
 	"users":     handlerUsers,
 	"agg":       handlerAgg,
-	"addfeed":   handlerAddFeed,
+	"addfeed":   middlewareLoggedIn(handlerAddFeed),
 	"feeds":     handlerFeeds,
-	"follow":    handlerFeedFollows,
-	"following": handlerFollowing,
+	"follow":    middlewareLoggedIn(handlerFeedFollows),
+	"following": middlewareLoggedIn(handlerFollowing),
 }
 
 type commands struct {

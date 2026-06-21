@@ -60,7 +60,7 @@ func handlerAgg(s *state, cmd command) error {
 func handlerFeeds(s *state, cmd command) error {
 	feeds, err := s.db.GetFeeds(context.Background())
 	if err != nil {
-		return errors.New("Could not fetch feeds!")
+		return errors.New("could not fetch feeds")
 	}
 
 	for _, feed := range feeds {

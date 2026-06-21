@@ -50,3 +50,26 @@ func handlerFollowing(s *state, cmd command, user database.User) error {
 	}
 	return nil
 }
+
+func handlerUnfollow(s *state, cmd command, user database.User) error {
+	if len(cmd.args) == 0 {
+		return errors.New("no feed url provided")
+	}
+
+	feed, err := s.db.GetFeedByUrl(context.Background(), cmd.args[0])
+	if err != nil {
+		return errors.New("invalid url")
+	}
+
+	params := database.DeleteFeedFollowParams{
+		FeedID: feed.ID,
+		UserID: user.ID,
+	}
+
+	err = s.db.DeleteFeedFollow(context.Background(), params)
+	if err != nil {
+		return errors.New("could not unfollow feed")
+	}
+
+	return nil
+}

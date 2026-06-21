@@ -14,6 +14,7 @@ var handlers = map[string]func(*state, command) error{
 	"feeds":     handlerFeeds,
 	"follow":    middlewareLoggedIn(handlerFeedFollows),
 	"following": middlewareLoggedIn(handlerFollowing),
+	"unfollow":  middlewareLoggedIn(handlerUnfollow),
 }
 
 type commands struct {
